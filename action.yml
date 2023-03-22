@@ -1,8 +1,14 @@
 author: Minor Gordon
 branding:
   icon: loader
-description: Generate a static site from a Paradicms Markdown directory.
+description: Generate a static site from a Paradicms-formatted Airtable base.
 inputs:
+  airtable_access_token:
+    description: Airtable access token (not API key), see https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens
+    required: true
+  airtable_base_id:
+    description: Airtable base id such as appgU92SdGTwPIVNg, see the base API documentation
+    required: true
   app_configuration_file_path:
     description: Path to an app configuration file, which controls the static site
       generator
@@ -15,14 +21,15 @@ inputs:
   debug:
     description: Debug the action
     required: false
-  markdown_directory_path:
-    default: .
-    description: Path to a directory of Markdown files
-    required: false
   pipeline_id:
     description: Pipeline id. Defaults to the name of the repository.
     required: false
-name: Generate a static site from a Paradicms Markdown directory.
+  profile:
+    default: costume_core
+    description: 'Application profile of the data/metadata in the Airtable metadata,
+      one of: costume_core'
+    required: false
+name: Generate a static site from a Paradicms-formatted Airtable base.
 runs:
   image: Dockerfile
   using: docker
