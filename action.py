@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import dataclasses
 from dataclasses import dataclass
-from urllib.parse import urlparse
 
 from paradicms_etl.extractors.costume_core_data_airtable_extractor import (
     CostumeCoreDataAirtableExtractor,
@@ -22,10 +21,10 @@ class _Inputs(GitHubActionInputs):
             "description": "Airtable access token (not API key), see https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens"
         },
     )
-    airtable_base: str = dataclasses.field(
+    airtable_base_id: str = dataclasses.field(
         default=GitHubActionInputs.REQUIRED,
         metadata={
-            "description": "Airtable base id such as appgU92SdGTwPIVNg or a full Airtable base URL such as https://airtable.com/appgU92SdGTwPIVNg"
+            "description": "Airtable base id such as appgU92SdGTwPIVNg, see the base API documentation"
         },
     )
     profile: str = dataclasses.field(
@@ -47,19 +46,11 @@ class Action(GitHubAction[_Inputs]):
         return _Inputs
 
     def _run(self):
-        airtable_base_id = self._inputs.airtable_base
-        try:
-            airtable_base_url = urlparse(self._inputs.airtable_base)
-            if airtable_base_url.hostname == "airtable.com":
-                airtable_base_id = airtable_base_url.path.split("/")[1]
-        except (IndexError, ValueError):
-            pass
-
         profile = self._inputs.profile.lower()
         if profile == "costume_core":
             extractor = CostumeCoreDataAirtableExtractor(
                 access_token=self._inputs.airtable_access_token,
-                base_id=airtable_base_id,
+                base_id=self._inputs.airtable_base_id,
                 extracted_data_dir_path=self._extracted_data_dir_path,
             )
             transformer = CostumeCoreDataAirtableTransformer()
