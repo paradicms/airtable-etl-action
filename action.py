@@ -62,7 +62,7 @@ class Action(GitHubAction[_Inputs]):
             id=self._inputs.pipeline_id,
             loader=self._create_loader(),
             transformer=transformer,
-        ).extract_transform_load()
+        ).extract_transform_load(force_extract=self._force_extract)
 
 
 if __name__ == "__main__":
