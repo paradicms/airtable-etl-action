@@ -9,14 +9,13 @@ inputs:
   airtable_base_id:
     description: Airtable base id such as appgU92SdGTwPIVNg, see the base API documentation
     required: true
-  app_configuration_file_path:
-    description: Path to an app configuration file, which controls the static site
-      generator
-    required: false
   build_directory_path:
     default: _site
     description: Path to a directory where the generated static assets (CSS, HTML,
       JavaScript) should be placed
+    required: false
+  data_file_paths:
+    description: Colon-separated paths to one or more data files
     required: false
   debug:
     description: Debug the action
