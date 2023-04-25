@@ -1,7 +1,8 @@
 author: Minor Gordon
 branding:
   icon: loader
-description: Generate a static site from a Paradicms-formatted Airtable base.
+description: Extract, transform, and load data from a Paradicms-formatted Airtable
+  base.
 inputs:
   airtable_access_token:
     description: Airtable access token (not API key), see https://support.airtable.com/docs/creating-and-using-api-keys-and-access-tokens
@@ -9,13 +10,9 @@ inputs:
   airtable_base_id:
     description: Airtable base id such as appgU92SdGTwPIVNg, see the base API documentation
     required: true
-  build_directory_path:
-    default: _site
-    description: Path to a directory where the generated static assets (CSS, HTML,
-      JavaScript) should be placed
-    required: false
-  data_file_paths:
-    description: Colon-separated paths to one or more data files
+  data_directory_path:
+    default: _data
+    description: Path to a directory where extracted/ and loaded/ data should be stored
     required: false
   debug:
     description: Debug the action
@@ -28,7 +25,7 @@ inputs:
     description: 'Application profile of the data/metadata in the Airtable metadata,
       one of: costume_core'
     required: false
-name: Generate a static site from a Paradicms-formatted Airtable base.
+name: Extract, transform, and load data from a Paradicms-formatted Airtable base.
 runs:
   image: Dockerfile
   using: docker
