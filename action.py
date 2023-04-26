@@ -2,7 +2,7 @@
 import dataclasses
 from dataclasses import dataclass
 
-from etl_github_action import EtlGitHubAction
+from paradicms_etl.etl_github_action import EtlGitHubAction
 from paradicms_etl.extractors.costume_core_data_airtable_extractor import (
     CostumeCoreDataAirtableExtractor,
 )
