@@ -51,7 +51,7 @@ class Action(EtlGitHubAction):
             extractor = CostumeCoreDataAirtableExtractor(
                 access_token=self.__airtable_access_token,
                 base_id=self.__airtable_base_id,
-                extracted_data_dir_path=self._extracted_data_dir_path,
+                cache_dir_path=self._cache_dir_path,
             )
             transformer = CostumeCoreDataAirtableTransformer()
         else:
