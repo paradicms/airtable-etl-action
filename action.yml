@@ -10,12 +10,20 @@ inputs:
   airtable_base_id:
     description: Airtable base id such as appgU92SdGTwPIVNg, see the base API documentation
     required: true
-  data_directory_path:
-    default: _data
-    description: Path to a directory where extracted/ and loaded/ data should be stored
+  cache_directory_path:
+    default: _cache
+    description: Path to a directory in which to store cached data
     required: false
   debug:
     description: Debug the action
+    required: false
+  loaded_data_directory_path:
+    default: _data
+    description: Path to a directory in which to store the loaded RDF file
+    required: false
+  loaded_data_file_path:
+    description: Path to a file in which to store the loaded RDF, overrides data_directory_path
+      if specified
     required: false
   pipeline_id:
     description: Pipeline id. Defaults to the name of the repository.
