@@ -57,12 +57,13 @@ class Action(EtlGitHubAction):
         else:
             raise NotImplementedError(f"profile: {self.__profile}")
 
-        Pipeline(
+        for _ in Pipeline(
             extractor=extractor,
             id=self._pipeline_id,
             loader=self._loader,
             transformer=transformer,
-        ).extract_transform_load(force_extract=self._force_extract)
+        )(force_extract=self._force_extract):
+            pass
 
 
 if __name__ == "__main__":
