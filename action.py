@@ -2,6 +2,8 @@
 import dataclasses
 from dataclasses import dataclass
 
+from more_itertools import consume
+
 from paradicms_etl.etl_github_action import EtlGitHubAction
 from paradicms_etl.extractors.costume_core_data_airtable_extractor import (
     CostumeCoreDataAirtableExtractor,
@@ -57,13 +59,14 @@ class Action(EtlGitHubAction):
         else:
             raise NotImplementedError(f"profile: {self.__profile}")
 
-        for _ in Pipeline(
-            extractor=extractor,
-            id=self._pipeline_id,
-            loader=self._loader,
-            transformer=transformer,
-        )(force_extract=self._force_extract):
-            pass
+        consume(
+            Pipeline(
+                extractor=extractor,
+                id=self._pipeline_id,
+                loader=self._loader,
+                transformer=transformer,
+            )(force_extract=self._force_extract)
+        )
 
 
 if __name__ == "__main__":
