@@ -1,4 +1,4 @@
-FROM ghcr.io/paradicms/paradicms:latest
+FROM ghcr.io/paradicms/etl:latest
 
 ADD action.py /action.py
 
